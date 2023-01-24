@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Account Detail{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h4>Account info...</h4>
+    <br>
+    <p>
+        Username : {{ object.username }}
+    </p>
+    <p>
+        Email : {{ object.email }}
+    </p>
+    <p>
+        <em>
+            You can update your information <a href="{% url 'accounts:account_update' %}">here</a>.
+        </em>
+    </p>
+
+    <a href="{% url 'accounts:account_delete' %}" class="btn btn-danger">Delete account</a>
+
+</div>
+{% endblock %}

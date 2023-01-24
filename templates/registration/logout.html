@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h3>Are you sure you want to logout?</h3>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <button type="submit" class="btn btn-success">Logout</button>
+        <a href="{% url 'todo:list_view' %}" class="btn btn-success" style="color: inherit; text-decoration: none;">Back to home</a>
+        
+    </form>
+</div>
+{% endblock %}

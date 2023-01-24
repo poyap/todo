@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Account update{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h2>Update your account...</h2>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <button type="submit"  class="btn btn-success">Update</button>
+        <a href="{% url 'accounts:account_detail' %}" class="btn btn-light" style="text-decoration:none; color: inherit ;">Cancel</a>
+    </form>
+</div>
+{% endblock %}
