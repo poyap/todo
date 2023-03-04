@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Update todo{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h2>Update your todo</h2>
+    <form action="{% url 'todo:update_view' object.uuid %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <div class="button">
+            <a href="{% url 'todo:list_view' %}" class="btn btn-primary">Back</a>
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

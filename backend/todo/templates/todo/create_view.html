@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create todo{% endblock %}
+{% block content %}
+<h2>Create a todo</h2><br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <br>
+    <div class="button">
+        <a href="{% url 'todo:list_view' %}" class="btn btn-primary">Back</a>
+        <input type="submit" class="btn btn-success me-2" value="Create">
+    </div>
+</form>
+
+<script>
+    now = new Date().toISOString().split("T")[0];
+    console.log(now)
+    console.log(new Date().toLocaleDateString('fa-ir'))
+</script>
+
+
+{% endblock %}

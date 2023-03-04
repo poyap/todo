@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load todo_tags %}
+{% block title %}Todo's list{% endblock %}
+{% block content %}
+<h3 class="block-inline">List of your todos</h3>
+<br>
+<h4 class="float-end"><a href="{% url 'todo:create_view' %}" style="text-decoration: none;">Create a new todo!</a></h4><br>
+<hr>
+<div class="w-50"> 
+        
+        {% for object in object_list %}
+        <div class="row">
+                <div class="col-10">
+                        <h5><span class="border border-3 border-primary rounded-circle p-1">{{ forloop.counter }}</span></h5>
+                        <ul class="p-4">
+                                <li>Title: 
+                                        <br><span class="dead-color">{{ object.title }}</span>
+                                </li>
+                                <li>Description: 
+                                        <br>
+                                        <span class="dead-color">{{ object.description|slice:200 }},...
+                                                <a href="{% url 'todo:detail_view' object.uuid %}">see more </a>
+                                        </span>
+                                </li>
+                                <li>Deadline: 
+                                        <br>
+                                        <span class="dead-color">{{ object.dead_line|date:'D j-n-Y' }}</span>
+                                </li>
+                                <li>Days remained: 
+                                        <span class="dead-color">
+                                        {% if object|get_remained_days < 0 %}passed{% else %} {{ object|get_remained_days }}   day{{ object|get_remained_days|pluralize }}{% endif %}
+                                        </span>
+                                        
+                                </li>
+                        </ul>
+  
+                </div>
+                <div class="col-2 mt-2">
+                        <form action="{% url 'todo:delete_view' object.uuid %}" method="post" class="">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete" class="form-control btn btn-danger">
+                        </form>
+                        <a href="{% url 'todo:update_view' object.uuid %}" class="form-control btn btn-success mt-2">Update</a>
+
+        
+                </div>
+        </div>
+        <hr>
+        {% endfor %}
+</div>
+
+{% endblock %}

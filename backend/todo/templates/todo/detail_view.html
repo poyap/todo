@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load todo_tags %}
+{% block title %} todo ({{object.uuid}}) detail {% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="col-10">
+        <h5>{{ forloop.counter }}</h5>
+        <p>Title: {{ object.title }}</p>
+        <p>Description: {{ object.description }}</p>
+        <p>Deadline: {{ object.dead_line|date:'D j-n-Y' }}</p>
+        <p>Days remained: {% if object|get_remained_days < 0 %}passed{% else %} {{ object|get_remained_days }}   day{{ object|get_remained_days|pluralize }}{% endif %}</p>
+        <a href="{% url 'todo:list_view' %}" class="btn btn-success">Back</a>
+        <a href="{% url 'todo:update_view' object.uuid %}" class="btn btn-warning">Update</a>
+    </div>
+</div>
+{% endblock %}

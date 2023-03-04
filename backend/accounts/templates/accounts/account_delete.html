@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Delete account{% endblock %}
+
+{% block content %}
+<h4>Are you sure you want to delete your account?</h4>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"  class="btn btn-danger">Delete account</button>
+    <a href="{% url 'accounts:account_detail' request.user.pk %}" class="btn btn-light" style="text-decoration:none; color: inherit ;">Cancel</a>
+</form>
+{% endblock %}
